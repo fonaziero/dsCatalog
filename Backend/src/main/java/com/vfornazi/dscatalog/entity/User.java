@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,11 +25,13 @@ public class User implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String firstName;
-	private String LastName;
+	private String lastName;
+	
+	@Column(unique = true)
 	private String email;
 	private String password;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tb_user_role",
 			joinColumns = @JoinColumn(name = "user_id"),
 			inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -44,7 +48,7 @@ public class User implements Serializable{
 	
 		this.id = id;
 		this.firstName = firstName;
-		LastName = lastName;
+		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 	}
@@ -76,13 +80,13 @@ public class User implements Serializable{
 
 
 	public String getLastName() {
-		return LastName;
+		return lastName;
 	}
 
 
 
 	public void setLastName(String lastName) {
-		LastName = lastName;
+		this.lastName = lastName;
 	}
 
 
@@ -121,7 +125,7 @@ public class User implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((LastName == null) ? 0 : LastName.hashCode());
+		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -140,10 +144,10 @@ public class User implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (LastName == null) {
-			if (other.LastName != null)
+		if (lastName == null) {
+			if (other.lastName != null)
 				return false;
-		} else if (!LastName.equals(other.LastName))
+		} else if (!lastName.equals(other.lastName))
 			return false;
 		if (email == null) {
 			if (other.email != null)
