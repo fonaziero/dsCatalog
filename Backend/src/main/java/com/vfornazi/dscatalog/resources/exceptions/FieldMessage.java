@@ -7,7 +7,7 @@ public class FieldMessage implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private String fieldMString;
+	private String fieldMessage;
 	private String message;
 	
 	public FieldMessage() {
@@ -15,16 +15,16 @@ public class FieldMessage implements Serializable{
 	}
 
 	public FieldMessage(String fieldMString, String message) {
-		this.fieldMString = fieldMString;
+		this.fieldMessage = fieldMString;
 		this.message = message;
 	}
 
 	public String getFieldMString() {
-		return fieldMString;
+		return fieldMessage;
 	}
 
 	public void setFieldMString(String fieldMString) {
-		this.fieldMString = fieldMString;
+		this.fieldMessage = fieldMString;
 	}
 
 	public String getMessage() {
